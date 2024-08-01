@@ -1,0 +1,8 @@
+{
+    "$schema": "./../CTAutocomplete/schema.json",
+    "name":"ratils",
+    "creator":"atxm/rat",
+    "description":"A utility library created by atxm/the rat",
+    "version":"1.0.0",
+    "entry":"index.js"
+}
