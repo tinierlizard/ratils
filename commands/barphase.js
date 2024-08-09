@@ -1,14 +1,11 @@
 /// <reference types="../../CTAutocomplete" />
 /// <reference lib="es2015" />
 
-import { isOneOf } from '../utils';
+const tpDistance = 0.6;
+const commandNames = ['barphase', 'bp', 'phase'];
 
 let active = false;
 let tped = false;
-
-const tpDistance = 0.6;
-
-const commandNames = ['barphase', 'bp', 'phase'];
 
 function checkBlock() {
     const block = World.getBlockAt(

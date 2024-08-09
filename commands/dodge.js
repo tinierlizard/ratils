@@ -1,9 +1,6 @@
 /// <reference types="../../CTAutocomplete" />
 /// <reference lib="es2015" />
 
-// Imports
-import { isOneOf } from '../utils';
-
 // Constants
 const commandNames = ['sd', 'dodge', 'silentdodge'];
 

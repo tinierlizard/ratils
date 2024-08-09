@@ -2,7 +2,6 @@
 /// <reference lib="es2015" />
 
 import request from '../../requestV2';
-import { isOneOf } from '../utils';
 
 let enable = false;
 let link;
