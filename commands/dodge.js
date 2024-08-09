@@ -52,7 +52,7 @@ function command(args) {
 
         default:
             // help command
-            ratChat.chat('Available sub-commands: list, add, remove');
+            ratChat.chat('Available sub-commands: list, add, remove, clear');
             break;
     }
 }
@@ -61,8 +61,27 @@ function command(args) {
 function list() {
     ratChat.chat('&cSilent Dodge List:', true);
     for (let i = 0; i < dodgeData.names.length; i++) {
-        ratChat.chat(`&4${dodgeData.names[i]}&e: &4${dodgeData.reasons[i]}`);
+        let message = new Message(
+            new TextComponent(
+                `${ratChat.getPrefix()} ${i + 1}. &4${
+                    dodgeData.names[i]
+                }&e: &4${dodgeData.reasons[i]}`,
+            )
+                .setHoverValue(`&4CLICK TO REMOVE`)
+                .setClick('run_command', `rat sd remove ${dodgeData.names[i]}`),
+        );
+
+        ratChat.direct(message);
     }
+
+    let message = new Message(
+        new TextComponent(`${ratChat.getPrefix()} &4CLICK TO CLEAR`).setClick(
+            'run_command',
+            'rat sd clear',
+        ),
+    );
+
+    ratChat.direct(message);
     ratChat.chatBreak();
 }
 
@@ -86,7 +105,8 @@ function remove(args) {
     const index = dodgeData.names.indexOf(username);
 
     if (index == -1) {
-        ratChat.error(`Could not find User ${username}`);
+        ratChat.error(`Could not find user ${username}`);
+        return;
     }
 
     dodgeData.names.splice(index, 1);
@@ -108,3 +128,16 @@ function clear() {
 export function init() {
     return [commandNames, command];
 }
+
+// Triggers
+// Player joined our party
+register('chat', (rank, player, event) => {
+    if (dodgeData.names.includes(player)) {
+        ChatLib.command('p leave');
+        setTimeout(() => {
+            ratChat.warn(`Left party while dodging ${player}`);
+        }, 100);
+    }
+})
+    .setCriteria('[${rank}] ${player} has joined your party')
+    .setContains();

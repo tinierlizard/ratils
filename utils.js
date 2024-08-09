@@ -19,4 +19,12 @@ export class RatChat {
     chatBreak(sep = '-') {
         ChatLib.chat('&5' + ChatLib.getChatBreak(sep));
     }
+
+    direct(msg) {
+        ChatLib.chat(msg);
+    }
+
+    getPrefix() {
+        return '&8[&5RT&8]&e'
+    }
 }
