@@ -1,11 +1,14 @@
 /// <reference types="../../CTAutocomplete" />
 /// <reference lib="es2015" />
 
+import { isOneOf } from '../utils';
+
 let active = false;
-let debounce = false;
 let tped = false;
 
 const tpDistance = 0.6;
+
+const commandNames = ['barphase', 'bp', 'phase'];
 
 function checkBlock() {
     const block = World.getBlockAt(
@@ -41,15 +44,6 @@ function calcDistance(p1, p2) {
         (p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2 + (p1[2] - p2[2]) ** 2,
     );
 }
-
-register('command', (usr) => {
-    active = !active;
-    if (active) {
-        ChatLib.chat('&2&l[RT] &r&2Bar phase enabled');
-    } else {
-        ChatLib.chat('&4&l[RT] &r&4Bar phase disabled');
-    }
-}).setName('barphase');
 
 register('tick', () => {
     if (!active) return;
@@ -181,3 +175,20 @@ register('tick', () => {
         tped = false;
     }
 });
+
+function command(args) {
+    if (args == null) return;
+    if (!isOneOf(args[0], commandNames)) return;
+
+    active = !active;
+    ChatLib.chat(
+        active
+            ? '&2&l[RT] &r&2Bar phase enabled'
+            : '&4&l[RT] &r&4Bar phase disabled',
+    );
+}
+
+export function init() {
+    // prettier-ignore
+    register('command', ...args => command(args)).setName('rat');
+}

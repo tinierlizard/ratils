@@ -1,9 +1,11 @@
 /// <reference types="../../CTAutocomplete" />
 /// <reference lib="es2015" />
 
+import request from '../../requestV2';
+import { isOneOf } from '../utils';
+
 let enable = false;
 let link;
-import request from '../../requestV2';
 
 const commandNames = ['webhookbomb', 'whbomb', 'whb', 'wb']; // these names include the command name and all aliases
 
@@ -35,17 +37,6 @@ function bomb() {
     }, 500);
 
 
-}
-
-function isOneOf(a, b) {
-    for (x of b) {
-        console.log(x, a, a == x);
-        if (a == x) {
-            return true;
-        }
-    }
-
-    return false;
 }
 
 function command(args) {
