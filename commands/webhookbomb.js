@@ -40,11 +40,8 @@ function bomb() {
 
 function command(args) {
     if (args == null) return;
-    if (!commandNames.includes(args[0])) return;
 
     args = args.slice(1); // removes the command name from the args list
-
-    console.log(args);
 
     switch (args[0]) {
         case 'toggle':
@@ -69,5 +66,5 @@ function command(args) {
 
 export function init() {
     // prettier-ignore
-    register('command', ...args => command(args)).setName('rat');
+    register('command', ...args => command(args)).setName('rat').setAliases(['rt']);
 }

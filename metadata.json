@@ -4,5 +4,6 @@
     "creator":"atxm/rat",
     "description":"A utility library created by atxm/the rat",
     "version":"1.0.0",
-    "entry":"index.js"
+    "entry":"index.js",
+    "requires": ["PogData", "PromiseV2"]
 }

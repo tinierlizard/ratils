@@ -175,7 +175,6 @@ register('tick', () => {
 
 function command(args) {
     if (args == null) return;
-    if (!commandNames.includes(args[0])) return;
 
     active = !active;
     ChatLib.chat(
@@ -187,5 +186,5 @@ function command(args) {
 
 export function init() {
     // prettier-ignore
-    register('command', ...args => command(args)).setName('rat');
+    register('command', ...args => command(args)).setName('rat').setAliases(['rt']);
 }
