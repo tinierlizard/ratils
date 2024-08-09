@@ -178,7 +178,7 @@ register('tick', () => {
 
 function command(args) {
     if (args == null) return;
-    if (!isOneOf(args[0], commandNames)) return;
+    if (!commandNames.includes(args[0])) return;
 
     active = !active;
     ChatLib.chat(

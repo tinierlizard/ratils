@@ -41,7 +41,7 @@ function bomb() {
 
 function command(args) {
     if (args == null) return;
-    if (!isOneOf(args[0], commandNames)) return;
+    if (!commandNames.includes(args[0])) return;
 
     args = args.slice(1); // removes the command name from the args list
 
